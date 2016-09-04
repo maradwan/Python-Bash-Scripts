@@ -51,6 +51,35 @@ while loop == 1:
                 except:
                         print " failed"
                         db.close()
+        elif choice ==3:
+                cls()
+                print"-----------------Update Address Book----------------"
+                var1 = raw_input("Please Enter the Email of user you want to update ")
+                var2 = raw_input("Please Enter the updated phone ")
+                db = MySQLdb.connect("localhost","root","","users")
+                cursor = db.cursor()
+                sql = "UPDATE address set phone = '%s' where email = '%s'" % (var2,var1)
+                try:
+                        cursor.execute(sql)
+                        db.commit()
+                except:
+                        db.rollback()
+                db.close()
+
+
+        elif choice ==4:
+                cls()
+                var1 = raw_input("Please Enter the email of user you want to delete it ")
+                db = MySQLdb.connect("localhost","root","","users")
+                cursor = db.cursor()
+                sql = "DELETE from address where email = '%s'" % var1
+                try:
+                        cursor.execute(sql)
+                        db.commit()
+                except:
+                        db.rollback()
+                db.close()
+
         elif choice ==5:
                 loop=0
 print " Thank You"
